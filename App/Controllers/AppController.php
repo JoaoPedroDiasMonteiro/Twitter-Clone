@@ -23,6 +23,14 @@ class AppController extends Action
 
         $this->view->tweets = $tweets;
 
+        $usuario = Container::getModel('Usuario');
+        $usuario->__set('id', $_SESSION['id']);
+
+        $this->view->total_tweets = $usuario->getTotalTweets();
+        $this->view->total_seguindo = $usuario->getTotalSeguindo();    
+        $this->view->total_seguidores = $usuario->getTotalSeguidores();
+        $this->view->info_nome = $usuario->getInfoUsuario();
+
         $this->render('timeline');
     }
 
@@ -62,7 +70,17 @@ class AppController extends Action
             $usuarios = $usuario->getAll();
         }
 
+        
         $this->view->usuarios = $usuarios;
+
+
+        $usuario = Container::getModel('Usuario');
+        $usuario->__set('id', $_SESSION['id']);
+        $this->view->total_tweets = $usuario->getTotalTweets();
+        $this->view->total_seguindo = $usuario->getTotalSeguindo();    
+        $this->view->total_seguidores = $usuario->getTotalSeguidores();
+        $this->view->info_nome = $usuario->getInfoUsuario();
+
         $this->render('quemSeguir');
     }
 
