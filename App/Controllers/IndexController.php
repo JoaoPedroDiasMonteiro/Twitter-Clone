@@ -11,7 +11,7 @@ class IndexController extends Action
 
 	public function index()
 	{
-
+		$this->view->login = isset($_GET['login']) ? $_GET['login'] : '';
 		$this->render('index');
 	}
 
@@ -39,7 +39,6 @@ class IndexController extends Action
 
 			$usuario->salvar();
 			$this->render('cadastro');
-
 		} else {
 			$this->view->usuario = [
 				'nome' => $_POST['nome'],
