@@ -83,4 +83,15 @@ class AppController extends Action
         }
         header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
+    
+    public function deletarTweet()
+    {
+        $this->validaAutenticacao();
+        $tweet = Container::getModel('Tweet');
+        $tweet->__set('id_usuario', $_GET['user']);
+        $tweet->__set('id', $_GET['tt']);
+        $tweet->deletar();
+
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+    }
 }
