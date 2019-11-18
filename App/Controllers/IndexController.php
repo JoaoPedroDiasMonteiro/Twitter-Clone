@@ -11,8 +11,15 @@ class IndexController extends Action
 
 	public function index()
 	{
+
 		$this->view->login = isset($_GET['login']) ? $_GET['login'] : '';
-		$this->render('index');
+		session_start();
+        if (!isset($_SESSION['id']) || $_SESSION['id'] == '' || !isset($_SESSION['nome']) || $_SESSION['nome'] == '') {
+			$this->render('index');
+        } else {
+			header('Location: /timeline');
+		}
+		
 	}
 
 	public function inscreverse()
